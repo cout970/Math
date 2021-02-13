@@ -2,6 +2,7 @@
 
 package com.cout970.math.vec3
 
+import kotlin.math.absoluteValue
 import kotlin.math.acos
 import kotlin.math.sqrt
 
@@ -377,4 +378,41 @@ fun Vec3d.lerp(other: Vec3, split: Double): ImmVec3d {
         this.yd * inv + other.yd * split,
         this.zd * inv + other.zd * split,
     )
+}
+
+// Normalized vector
+fun Vec3f.normalized(): ImmVec3f {
+    val len = length()
+    if (len.absoluteValue < 0.0001) {
+        return ImmVec3f()
+    }
+    return ImmVec3f(xf / len, yf / len, zf / len)
+}
+
+fun Vec3d.normalized(): ImmVec3d {
+    val len = length()
+    if (len.absoluteValue < 0.0001) {
+        return ImmVec3d()
+    }
+    return ImmVec3d(xd / len, yd / len, zd / len)
+}
+
+fun MutVec3f.normalize() {
+    val len = length()
+    if (len.absoluteValue < 0.0001) {
+        return
+    }
+    x = xf / len
+    y = yf / len
+    z = zf / len
+}
+
+fun MutVec3d.normalize() {
+    val len = length()
+    if (len.absoluteValue < 0.0001) {
+        return
+    }
+    x = xd / len
+    y = yd / len
+    z = zd / len
 }
