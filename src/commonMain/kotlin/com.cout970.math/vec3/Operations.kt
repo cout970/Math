@@ -116,7 +116,7 @@ inline operator fun Vec3d.unaryMinus(): ImmVec3d {
     return ImmVec3d(-x, -y, -z)
 }
 
-// unary plus: -a
+// unary plus: +a
 
 inline operator fun Vec3f.unaryPlus(): ImmVec3f {
     return ImmVec3f(+x, +y, +z)
@@ -383,8 +383,11 @@ fun Vec3d.lerp(other: Vec3, split: Double): ImmVec3d {
 // Normalized vector
 fun Vec3f.normalized(): ImmVec3f {
     val len = length()
-    if (len.absoluteValue < 0.0001) {
+    if (len.absoluteValue < 0.0001f) {
         return ImmVec3f()
+    }
+    if (len == 1.0f) {
+        return this.asImmVec3f()
     }
     return ImmVec3f(xf / len, yf / len, zf / len)
 }
@@ -394,12 +397,18 @@ fun Vec3d.normalized(): ImmVec3d {
     if (len.absoluteValue < 0.0001) {
         return ImmVec3d()
     }
+    if (len == 1.0) {
+        return this.asImmVec3d()
+    }
     return ImmVec3d(xd / len, yd / len, zd / len)
 }
 
 fun MutVec3f.normalize() {
     val len = length()
-    if (len.absoluteValue < 0.0001) {
+    if (len.absoluteValue < 0.0001f) {
+        return
+    }
+    if (len == 1.0f) {
         return
     }
     x = xf / len
@@ -410,6 +419,9 @@ fun MutVec3f.normalize() {
 fun MutVec3d.normalize() {
     val len = length()
     if (len.absoluteValue < 0.0001) {
+        return
+    }
+    if (len == 1.0) {
         return
     }
     x = xd / len

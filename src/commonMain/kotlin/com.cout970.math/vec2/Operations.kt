@@ -111,7 +111,7 @@ inline operator fun Vec2d.unaryMinus(): ImmVec2d {
     return ImmVec2d(-x, -y)
 }
 
-// unary plus: -a
+// unary plus: +a
 
 inline operator fun Vec2f.unaryPlus(): ImmVec2f {
     return ImmVec2f(+x, +y)

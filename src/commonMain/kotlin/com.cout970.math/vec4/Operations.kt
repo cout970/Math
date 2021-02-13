@@ -2,6 +2,7 @@
 
 package com.cout970.math.vec4
 
+import com.cout970.math.quaternion.Quat
 import kotlin.math.absoluteValue
 import kotlin.math.acos
 import kotlin.math.sqrt
@@ -82,7 +83,7 @@ operator fun Vec4i.minus(other: Vec4): ImmVec4i {
 }
 
 operator fun Vec4d.minus(other: Vec4): ImmVec4d {
-    return ImmVec4d(this.x - other.xd, this.y - other.yd, this.z - other.zd, this.w - other.wi)
+    return ImmVec4d(this.x - other.xd, this.y - other.yd, this.z - other.zd, this.w - other.wd)
 }
 
 inline operator fun Vec4f.minus(other: Number): ImmVec4f {
@@ -142,7 +143,7 @@ inline operator fun Vec4d.unaryMinus(): ImmVec4d {
     return ImmVec4d(-x, -y, -z, -w)
 }
 
-// unary plus: -a
+// unary plus: +a
 
 inline operator fun Vec4f.unaryPlus(): ImmVec4f {
     return ImmVec4f(+x, +y, +z, +w)
@@ -336,6 +337,12 @@ fun Vec4.toImmVec4d(): ImmVec4d = ImmVec4d(xd, yd, zd, wd)
 fun Vec4.toMutVec4f(): MutVec4f = MutVec4f(xf, yf, zf, wf)
 fun Vec4.toMutVec4i(): MutVec4i = MutVec4i(xi, yi, zi, wi)
 fun Vec4.toMutVec4d(): MutVec4d = MutVec4d(xd, yd, zd, wd)
+
+fun Quat.toImmVec4f(): ImmVec4f = ImmVec4f(xf, yf, zf, wf)
+fun Quat.toImmVec4d(): ImmVec4d = ImmVec4d(xd, yd, zd, wd)
+
+fun Quat.toMutVec4f(): MutVec4f = MutVec4f(xf, yf, zf, wf)
+fun Quat.toMutVec4d(): MutVec4d = MutVec4d(xd, yd, zd, wd)
 
 fun Vec4.asImmVec4f(): ImmVec4f = this as? ImmVec4f ?: this.toImmVec4f()
 fun Vec4.asImmVec4i(): ImmVec4i = this as? ImmVec4i ?: this.toImmVec4i()
