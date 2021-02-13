@@ -461,6 +461,9 @@ fun Vec4f.normalized(): ImmVec4f {
     if (len.absoluteValue < 0.0001) {
         return ImmVec4f()
     }
+    if (len == 1.0f) {
+        return this.toImmVec4f()
+    }
     return ImmVec4f(xf / len, yf / len, zf / len, wf / len)
 }
 
@@ -469,12 +472,18 @@ fun Vec4d.normalized(): ImmVec4d {
     if (len.absoluteValue < 0.0001) {
         return ImmVec4d()
     }
+    if (len == 1.0) {
+        return this.toImmVec4d()
+    }
     return ImmVec4d(xd / len, yd / len, zd / len, wd / len)
 }
 
 fun MutVec4f.normalize() {
     val len = length()
     if (len.absoluteValue < 0.0001) {
+        return
+    }
+    if (len == 1.0f) {
         return
     }
     x = xf / len
@@ -486,6 +495,9 @@ fun MutVec4f.normalize() {
 fun MutVec4d.normalize() {
     val len = length()
     if (len.absoluteValue < 0.0001) {
+        return
+    }
+    if (len == 1.0) {
         return
     }
     x = xd / len

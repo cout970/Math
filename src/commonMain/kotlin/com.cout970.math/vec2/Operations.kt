@@ -357,8 +357,11 @@ fun Vec2d.lerp(other: Vec2, split: Double): ImmVec2d {
 // Normalized vector
 fun Vec2f.normalized(): ImmVec2f {
     val len = length()
-    if (len.absoluteValue < 0.0001) {
+    if (len.absoluteValue < 0.0001f) {
         return ImmVec2f()
+    }
+    if (len == 1.0f) {
+        return this.toImmVec2f()
     }
     return ImmVec2f(xf / len, yf / len)
 }
@@ -368,12 +371,18 @@ fun Vec2d.normalized(): ImmVec2d {
     if (len.absoluteValue < 0.0001) {
         return ImmVec2d()
     }
+    if (len == 1.0) {
+        return this.toImmVec2d()
+    }
     return ImmVec2d(xd / len, yd / len)
 }
 
 fun MutVec2f.normalize() {
     val len = length()
     if (len.absoluteValue < 0.0001) {
+        return
+    }
+    if (len == 1.0f) {
         return
     }
     x = xf / len
@@ -383,6 +392,9 @@ fun MutVec2f.normalize() {
 fun MutVec2d.normalize() {
     val len = length()
     if (len.absoluteValue < 0.0001) {
+        return
+    }
+    if (len == 1.0) {
         return
     }
     x = xd / len

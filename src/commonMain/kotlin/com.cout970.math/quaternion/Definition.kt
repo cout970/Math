@@ -4,6 +4,10 @@ package com.cout970.math.quaternion
  * Readonly, type agnostic version of quaternion
  * The underling implementation could be mutable or immutable
  *
+ * Quaternions are commonly used to represent rotations in a 3D space,
+ * a lot of utilities are provided so you don't need to understand the mechanisms that make them work,
+ * you can think of then like magic black boxes that can store and apply 3D rotations
+ *
  * Provides efficient primitive type getters
  *
  * Notes:
